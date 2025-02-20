@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db:
+    image: m.daocloud.io/docker.io/library/postgres:9.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+  backend:
+    build: backend/.
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+  frontend:
+    build: frontend/.
+    ports: 
+      - "80:80"
+    depends_on: 
+      - backend
