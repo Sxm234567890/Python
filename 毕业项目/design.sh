@@ -1,3 +1,4 @@
+2 8G 40G
 git init .
 git clone https://github.com/zhulinn/SpringBoot-Angular7-Online-Shopping-Store.git
 #解决npm的错误
